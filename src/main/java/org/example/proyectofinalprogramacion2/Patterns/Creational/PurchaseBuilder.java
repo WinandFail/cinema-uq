@@ -1,6 +1,7 @@
 package org.example.proyectofinalprogramacion2.Patterns.Creational;
 
 import org.example.proyectofinalprogramacion2.Model.*;
+import org.example.proyectofinalprogramacion2.Model.Combo;
 
 public class PurchaseBuilder {
     private Purchase purchase = new Purchase();

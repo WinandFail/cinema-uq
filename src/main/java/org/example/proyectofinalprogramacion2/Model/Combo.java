@@ -1,16 +1,23 @@
 package org.example.proyectofinalprogramacion2.Model;
 
-public class Combo {
-    private String name;
-    private double price;
-    private double discount;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Combo(String name, double price, double discount) {
-        this.name = name;
-        this.price = price;
-        this.discount = discount;
+public class Combo implements ProductComponent {
+    private String comboName;
+    private List<ProductComponent> items = new ArrayList<>();
+
+    public void addItem(ProductComponent item) { items.add(item); }
+
+    @Override
+    public double getPrice() {
+        double total = 0;
+        for (ProductComponent item : items) {
+            total += item.getPrice();
+        }
+
+        return total * 0.9;
     }
-
-    public double getFinalPrice() { return price - discount; }
-    public String getName() { return name; }
+    @Override
+    public String getDescription() { return comboName; }
 }

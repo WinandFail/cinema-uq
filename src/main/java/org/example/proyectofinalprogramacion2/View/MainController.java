@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 import org.example.proyectofinalprogramacion2.Model.*;
 import org.example.proyectofinalprogramacion2.Patterns.Creational.*;
+import org.example.proyectofinalprogramacion2.Model.Combo;
 import org.example.proyectofinalprogramacion2.Services.PurchaseService;
 import org.example.proyectofinalprogramacion2.Services.PointsService;
 
