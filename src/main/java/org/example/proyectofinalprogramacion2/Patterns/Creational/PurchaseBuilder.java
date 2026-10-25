@@ -16,13 +16,15 @@ public class PurchaseBuilder {
         return this;
     }
 
-    public PurchaseBuilder addProduct(Product p) {
-        purchase.getProducts().add(p);
+    // CAMBIO AQUÍ: Usamos addItem en lugar de getProducts().add()
+    public PurchaseBuilder addProduct(ProductComponent p) {
+        purchase.addItem(p);
         return this;
     }
 
-    public PurchaseBuilder addCombo(Combo c) {
-        purchase.getCombos().add(c);
+    // CAMBIO AQUÍ: Usamos addItem en lugar de getCombos().add()
+    public PurchaseBuilder addCombo(ProductComponent c) {
+        purchase.addItem(c);
         return this;
     }
 

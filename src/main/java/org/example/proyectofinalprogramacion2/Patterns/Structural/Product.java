@@ -5,11 +5,19 @@ import org.example.proyectofinalprogramacion2.Model.ProductComponent;
 public class Product implements ProductComponent {
     private String name;
     private double price;
-    // Constructor, getters...
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
     @Override
-    public double getPrice() { return price; }
+    public double getFinalPrice() {
+        return this.price;
+    }
+
     @Override
-    public String getDescription() { return name; }
+    public String getDescription() {
+        return this.name;
+    }
 }
-
-

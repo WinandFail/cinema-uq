@@ -7,5 +7,5 @@ public class BasePurchase implements Purchase {
     @Override
     public double getTotalPaid() { return totalPaid; }
     @Override
-    public double getRefundAmount() { return totalPaid; } // Por defecto devuelve todo
+    public double getRefundAmount() { return totalPaid; }
 }

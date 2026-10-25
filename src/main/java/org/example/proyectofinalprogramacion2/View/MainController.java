@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import org.example.proyectofinalprogramacion2.Model.*;
 import org.example.proyectofinalprogramacion2.Patterns.Creational.*;
 import org.example.proyectofinalprogramacion2.Model.Combo;
+import org.example.proyectofinalprogramacion2.Patterns.Structural.Product;
 import org.example.proyectofinalprogramacion2.Services.PurchaseService;
 import org.example.proyectofinalprogramacion2.Services.PointsService;
 
@@ -31,6 +32,41 @@ public class MainController {
     }
 
     @FXML
+    private void onOpenAdapter() throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/org/example/proyectofinalprogramacion2/View/adapter-view.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Patrón Adapter");
+        stage.setScene(new Scene(loader.load(), 500, 300));
+        stage.show();
+    }
+
+    @FXML
+    private void onOpenProxy() throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/org/example/proyectofinalprogramacion2/View/proxy-view.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Patrón Proxy");
+        stage.setScene(new Scene(loader.load(), 500, 300));
+        stage.show();
+    }
+
+    @FXML
+    private void onOpenDecorator() throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/org/example/proyectofinalprogramacion2/View/decorator-view.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Patrón Decorator");
+        stage.setScene(new Scene(loader.load(), 500, 300));
+        stage.show();
+    }
+
+    @FXML
+    private void onOpenComposite() throws IOException {
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/org/example/proyectofinalprogramacion2/View/composite-view.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Patrón Composite");
+        stage.setScene(new Scene(loader.load(), 500, 300));
+        stage.show();
+    }
+    @FXML
     private void onBuyTickets() {
         Movie movie = new Movie("Interestelar", "Ciencia Ficción", 120, "PG-13");
         Room room = new Room("Sala 2", 96);
@@ -41,7 +77,7 @@ public class MainController {
                 .addTicket(new Ticket(new Seat("D", 7), screening.getBasePrice()))
                 .addTicket(new Ticket(new Seat("D", 8), screening.getBasePrice()))
                 .addProduct(new Product("Palomitas Grandes", 18_000))
-                .addCombo(new Combo("Combo parejas", 35_000, 5_000))
+                .addCombo(new Combo("Combo parejas", 35000, 5000))
                 .applyPromotion(new Promotion("Jueves 2x1", 8_000));
 
         Purchase purchase = new PurchaseService().processPurchase(ana, builder);

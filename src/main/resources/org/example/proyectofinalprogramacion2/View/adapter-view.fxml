@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.proyectofinalprogramacion2.View.AdapterController"
+      spacing="10" style="-fx-padding: 20;">
+    <Label text="Adapter: Generador de PDF" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <TextField fx:id="pathField" promptText="Ruta del archivo (ej: reporte.pdf)"/>
+    <Button text="Generar PDF" onAction="#generatePdf"/>
+    <TextArea fx:id="logArea" prefHeight="150" editable="false"/>
+</VBox>

@@ -17,5 +17,14 @@
         <Button text="Open reports" onAction="#onOpenReports"/>
     </HBox>
 
+    <!-- SECCIÓN DE PATRONES ESTRUCTURALES -->
+    <Label text="Patrones Estructurales" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 10 0 0 0;"/>
+    <HBox spacing="10">
+        <Button text="1. Adapter (PDF)" onAction="#onOpenAdapter"/>
+        <Button text="2. Proxy (Pago)" onAction="#onOpenProxy"/>
+        <Button text="3. Decorator (Reembolso)" onAction="#onOpenDecorator"/>
+        <Button text="4. Composite (Combos)" onAction="#onOpenComposite"/>
+    </HBox>
+
     <TextArea fx:id="outputArea" prefHeight="400" editable="false"/>
 </VBox>

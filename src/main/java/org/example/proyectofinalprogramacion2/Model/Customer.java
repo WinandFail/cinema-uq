@@ -15,11 +15,14 @@ public class Customer extends User {
         this.points = new ArrayList<>();
     }
 
+
     public VirtualCard getCard() { return card; }
     public List<Points> getPoints() { return points; }
 
     public void addPoints(Points p) { points.add(p); }
-
+    public void setCard(VirtualCard card) {
+        this.card = card;
+    }
     public int totalPoints() {
         return points.stream().filter(p -> !p.isExpired()).mapToInt(Points::getAmount).sum();
     }

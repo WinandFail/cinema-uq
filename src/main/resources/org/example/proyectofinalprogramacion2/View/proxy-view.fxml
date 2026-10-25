@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.proyectofinalprogramacion2.View.ProxyController"
+      spacing="10" style="-fx-padding: 20;">
+    <Label text="Proxy: Validación de Pagos" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <TextField fx:id="amountField" promptText="Monto a pagar"/>
+    <Button text="Procesar Pago" onAction="#processPayment"/>
+    <TextArea fx:id="logArea" prefHeight="150" editable="false"/>
+</VBox>

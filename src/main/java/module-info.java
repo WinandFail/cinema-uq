@@ -1,9 +1,10 @@
 module org.example.proyectofinalprogramacion2 {
     requires javafx.controls;
     requires javafx.fxml;
-    requires org.example.proyectofinalprogramacion2;
 
+    // Exporta el paquete View para que JavaFX lo vea
+    exports org.example.proyectofinalprogramacion2.View;
 
-    opens org.example.proyectofinalprogramacion2 to javafx.fxml;
-    exports org.example.proyectofinalprogramacion2;
+    // Permite que FXML inyecte los @FXML
+    opens org.example.proyectofinalprogramacion2.View to javafx.fxml;
 }
