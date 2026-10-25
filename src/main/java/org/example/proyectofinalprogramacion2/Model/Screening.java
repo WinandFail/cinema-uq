@@ -15,6 +15,9 @@ public class Screening {
         this.basePrice = basePrice;
     }
 
+    public Room getRoom() {
+        return room;
+    }
     public Movie getMovie() { return movie; }
     public double getBasePrice() { return basePrice; }
     public LocalDateTime getDateTime() { return dateTime; }

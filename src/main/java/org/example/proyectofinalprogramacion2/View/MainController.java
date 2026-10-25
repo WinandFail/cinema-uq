@@ -30,7 +30,16 @@ public class MainController {
         admin.rechargeCard(ana.getCard(), 200_000);
         statusLabel.setText("Bienvenido, " + ana.getName() + " | Balance: $" + ana.getCard().getBalance());
     }
-
+    @FXML
+    private void onOpenCartelera() throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                MainController.class.getResource("/org/example/proyectofinalprogramacion2/View/cartelera-view.fxml")
+        );
+        Stage stage = new Stage();
+        stage.setTitle("Cartelera CinemaUQ");
+        stage.setScene(new Scene(loader.load(), 600, 450));
+        stage.show();
+    }
     @FXML
     private void onOpenAdapter() throws IOException {
         FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/org/example/proyectofinalprogramacion2/View/adapter-view.fxml"));

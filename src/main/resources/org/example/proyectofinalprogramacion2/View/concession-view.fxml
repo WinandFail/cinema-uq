@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.proyectofinalprogramacion2.View.ConcessionController"
+      spacing="15" style="-fx-padding: 20;">
+
+    <Label text="Confitería" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <ListView fx:id="productsList" prefHeight="200"/>
+
+    <HBox spacing="10">
+        <Button text="Agregar al Carrito" onAction="#onAddProduct"/>
+        <Button text="Finalizar y Pagar" onAction="#onCheckout" style="-fx-background-color: #E91E63; -fx-text-fill: white;"/>
+    </HBox>
+
+    <TextArea fx:id="cartArea" prefHeight="150" editable="false" promptText="Resumen de la compra..."/>
+</VBox>

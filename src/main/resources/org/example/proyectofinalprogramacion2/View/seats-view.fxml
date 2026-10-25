@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.proyectofinalprogramacion2.View.SeatsController"
+      spacing="15" style="-fx-padding: 20;">
+
+    <Label text="Pantalla" style="-fx-background-color: lightgray; -fx-alignment: center; -fx-pref-width: 400; -fx-padding: 5;"/>
+
+    <!-- Aquí se generarán los asientos dinámicamente -->
+    <GridPane fx:id="seatsGrid" alignment="CENTER" hgap="5" vgap="5"/>
+
+    <Label fx:id="selectedSeatsLabel" text="Asientos seleccionados: 0"/>
+
+    <Button text="Continuar a Confitería" onAction="#onContinueToConcession" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+</VBox>
