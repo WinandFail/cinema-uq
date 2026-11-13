@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.proyectofinalprogramacion2.View.LoginController"
+      spacing="20" style="-fx-padding: 40;" alignment="CENTER">
+
+    <Label text="CinemaUQ" styleClass="title-text"/>
+
+    <TextField fx:id="emailField" promptText="Correo electrónico" prefWidth="300"/>
+    <PasswordField fx:id="passwordField" promptText="Contraseña" prefWidth="300"/>
+
+    <Label fx:id="errorLabel" text="" style="-fx-text-fill: #ff4d4d;"/>
+
+    <Button text="INICIAR SESIÓN" onAction="#onLogin" prefWidth="300"/>
+
+    <VBox spacing="5" alignment="CENTER" style="-fx-padding: 20px 0 0 0;">
+        <Label text="Cliente: ana@uq.edu.co / 1234" styleClass="text-muted"/>
+        <Label text="Admin: admin@uq.edu.co / admin" styleClass="text-muted"/>
+    </VBox>
+</VBox>

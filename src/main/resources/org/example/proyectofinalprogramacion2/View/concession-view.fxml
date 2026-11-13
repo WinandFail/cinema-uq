@@ -4,16 +4,20 @@
 
 <VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.example.proyectofinalprogramacion2.View.ConcessionController"
-      spacing="15" style="-fx-padding: 20;">
+      spacing="15" style="-fx-padding: 20;" alignment="CENTER">
 
-    <Label text="Confitería" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <Label text="CONFITERÍA" styleClass="title-text"/>
 
-    <ListView fx:id="productsList" prefHeight="200"/>
+    <ListView fx:id="productsList" prefHeight="250" prefWidth="550"/>
 
-    <HBox spacing="10">
-        <Button text="Agregar al Carrito" onAction="#onAddProduct"/>
-        <Button text="Finalizar y Pagar" onAction="#onCheckout" style="-fx-background-color: #E91E63; -fx-text-fill: white;"/>
+    <HBox spacing="20" alignment="CENTER">
+        <Button text="AGREGAR" onAction="#onAddProduct" prefWidth="180"/>
+        <Button text="PAGAR" onAction="#onCheckout" prefWidth="180"/>
     </HBox>
 
-    <TextArea fx:id="cartArea" prefHeight="150" editable="false" promptText="Resumen de la compra..."/>
+    <CheckBox fx:id="usePointsCheckBox" text="Usar 100 puntos para un descuento de $5,000" style="-fx-text-fill: #C1E0DF; -fx-font-family: 'Segoe UI'; -fx-font-size: 14px;"/>
+
+    <Label fx:id="totalPointsLabel" text="Puntos totales a ganar: ⭐ 0 pts" style="-fx-font-size: 16px;"/>
+
+    <TextArea fx:id="cartArea" prefHeight="120" prefWidth="550" editable="false" promptText="Resumen de la compra..."/>
 </VBox>

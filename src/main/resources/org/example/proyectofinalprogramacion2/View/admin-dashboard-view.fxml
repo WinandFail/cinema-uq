@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.proyectofinalprogramacion2.View.AdminDashboardController"
+      spacing="20" style="-fx-padding: 20;" alignment="CENTER">
+
+    <Label text="PANEL DE ADMINISTRACIÓN" styleClass="title-text"/>
+
+    <!-- Hacemos que el TabPane crezca dinámicamente y ocupe todo el espacio -->
+    <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" maxWidth="Infinity" maxHeight="Infinity">
+
+        <Tab text="Recargas">
+            <VBox spacing="20" alignment="CENTER" style="-fx-padding: 30;">
+                <HBox spacing="15" alignment="CENTER">
+                    <ComboBox fx:id="customerCombo" promptText="Cliente" prefWidth="200"/>
+                    <TextField fx:id="amountField" promptText="Monto" prefWidth="150"/>
+                    <Button text="RECARGAR" onAction="#onRechargeCard"/>
+                </HBox>
+                <TextArea fx:id="logArea" prefHeight="250" prefWidth="600" editable="false"/>
+            </VBox>
+        </Tab>
+
+        <Tab text="Cancelar Función">
+            <VBox spacing="20" alignment="CENTER" style="-fx-padding: 30;">
+                <Label text="Si cancelas una función, se devolverá el 100% del dinero a los clientes."/>
+                <ComboBox fx:id="screeningCombo" promptText="Seleccione Función a Cancelar" prefWidth="400"/>
+                <Button text="CANCELAR Y REEMBOLSAR" onAction="#onCancelScreening"/>
+                <TextArea fx:id="cancelLogArea" prefHeight="200" prefWidth="600" editable="false"/>
+            </VBox>
+        </Tab>
+
+        <Tab text="Gestionar Cartelera">
+            <VBox spacing="15" alignment="CENTER" style="-fx-padding: 30;">
+                <Label text="Agregar Nueva Película" style="-fx-font-size: 18px;"/>
+                <TextField fx:id="movieTitleField" promptText="Título de la película" prefWidth="300"/>
+                <TextField fx:id="moviePriceField" promptText="Precio (ej. 15000)" prefWidth="300"/>
+                <Button text="AGREGAR PELÍCULA" onAction="#onAddMovie"/>
+            </VBox>
+        </Tab>
+
+        <Tab text="Gestionar Confitería">
+            <HBox spacing="50" alignment="CENTER" style="-fx-padding: 30;">
+                <VBox spacing="15" alignment="CENTER">
+                    <Label text="Producto Individual" style="-fx-font-size: 18px;"/>
+                    <TextField fx:id="prodNameField" promptText="Nombre" prefWidth="200"/>
+                    <TextField fx:id="prodPriceField" promptText="Precio" prefWidth="200"/>
+                    <Button text="CREAR PRODUCTO" onAction="#onAddProduct"/>
+                </VBox>
+                <VBox spacing="15" alignment="CENTER">
+                    <Label text="Combo" style="-fx-font-size: 18px;"/>
+                    <TextField fx:id="comboNameField" promptText="Nombre" prefWidth="200"/>
+                    <TextField fx:id="comboBasePriceField" promptText="Precio Base" prefWidth="200"/>
+                    <TextField fx:id="comboDiscountField" promptText="Descuento" prefWidth="200"/>
+                    <Button text="CREAR COMBO" onAction="#onAddCombo"/>
+                </VBox>
+            </HBox>
+        </Tab>
+
+        <Tab text="Reportes">
+            <VBox spacing="20" alignment="CENTER" style="-fx-padding: 50;">
+                <Label text="Reportes Operativos" style="-fx-font-size: 18px;"/>
+                <Button text="ABRIR REPORTES Y GRÁFICOS" onAction="#onOpenReports" prefWidth="300"/>
+            </VBox>
+        </Tab>
+    </TabPane>
+</VBox>

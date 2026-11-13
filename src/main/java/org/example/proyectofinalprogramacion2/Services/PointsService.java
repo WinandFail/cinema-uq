@@ -8,22 +8,29 @@ import java.util.List;
 
 public class PointsService {
 
-    public int redeem(Customer customer, int pointsToRedeem) {
+    // 1. Verificar si tiene puntos suficientes
+    public boolean canRedeem(Customer customer, int pointsToRedeem) {
+        return customer.totalPoints() >= pointsToRedeem;
+    }
+
+    // 2. Deducir los puntos de los lotes más próximos a vencer
+    public void deductPoints(Customer customer, int pointsToRedeem) {
         List<Points> list = customer.getPoints();
+        // Ordenamos por fecha de vencimiento (los más viejos primero)
         list.sort(Comparator.comparing(Points::getExpirationDate));
 
         int remaining = pointsToRedeem;
-        int redeemed = 0;
 
         for (Points p : list) {
             if (p.isExpired()) continue;
             if (remaining <= 0) break;
+
             int use = Math.min(p.getAmount(), remaining);
+            p.setAmount(p.getAmount() - use);
             remaining -= use;
-            redeemed += use;
         }
 
-        if (remaining > 0) return 0;
-        return redeemed;
+        // Limpiamos los lotes de puntos que se quedaron en 0
+        list.removeIf(p -> p.getAmount() <= 0);
     }
 }

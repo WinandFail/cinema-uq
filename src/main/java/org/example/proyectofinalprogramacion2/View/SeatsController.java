@@ -8,7 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import org.example.proyectofinalprogramacion2.Model.*;
+import org.example.proyectofinalprogramacion2.Model.Room;
+import org.example.proyectofinalprogramacion2.Model.Screening;
+import org.example.proyectofinalprogramacion2.Model.Seat;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,10 +19,10 @@ import java.util.List;
 public class SeatsController {
     @FXML private GridPane seatsGrid;
     @FXML private Label selectedSeatsLabel;
+    @FXML private Label totalPointsLabel; // NUEVO
 
     private Screening screening;
     private List<Seat> selectedSeats = new ArrayList<>();
-
 
     public void initData(Screening screening) {
         this.screening = screening;
@@ -28,7 +30,6 @@ public class SeatsController {
     }
 
     private void generateSeats() {
-        // Generamos una cuadrícula de 5x8 (40 asientos) de prueba
         Room room = screening.getRoom();
         int rows = 5;
         int cols = 8;
@@ -38,29 +39,54 @@ public class SeatsController {
                 String seatRow = String.valueOf((char) ('A' + row));
                 int seatNum = col + 1;
 
-                // Creamos el asiento en el modelo
                 Seat seat = new Seat(seatRow, seatNum);
-                room.getSeats().add(seat); // Asumiendo que Room tiene una lista de asientos
+                room.getSeats().add(seat);
 
                 Button btn = new Button(seatRow + seatNum);
-                btn.setPrefSize(40, 40);
-                btn.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;"); // Verde = Disponible
+                // Botones un poco más cuadrados y con buen espacio
+                btn.setPrefSize(45, 45);
 
-                // Lógica al hacer clic en el asiento
-                btn.setOnAction(e -> {
-                    if (selectedSeats.contains(seat)) {
-                        selectedSeats.remove(seat);
-                        btn.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
-                    } else {
-                        selectedSeats.add(seat);
-                        btn.setStyle("-fx-background-color: #FFC107; -fx-text-fill: black;"); // Amarillo = Seleccionado
-                    }
-                    selectedSeatsLabel.setText("Asientos seleccionados: " + selectedSeats.size());
-                });
+                // --- SOLUCIÓN: Fuente estándar, tamaño ajustado y sin padding interno ---
+                String estiloBase = "-fx-font-family: 'Segoe UI', Arial, sans-serif; " +
+                        "-fx-font-size: 13px; " +
+                        "-fx-font-weight: bold; " +
+                        "-fx-padding: 0; ";
+
+                if ((row == 1 && col == 1) || (row == 2 && col == 4) || (row == 3 && col == 6)) {
+                    // Asiento Ocupado
+                    seat.occupy();
+                    btn.setStyle(estiloBase + "-fx-background-color: #9E9E9E; -fx-text-fill: white;");
+                    btn.setDisable(true);
+                } else {
+                    // Asiento Disponible
+                    btn.setStyle(estiloBase + "-fx-background-color: #4CAF50; -fx-text-fill: white;");
+
+                    btn.setOnAction(e -> {
+                        if (selectedSeats.contains(seat)) {
+                            selectedSeats.remove(seat);
+                            btn.setStyle(estiloBase + "-fx-background-color: #4CAF50; -fx-text-fill: white;");
+                        } else {
+                            selectedSeats.add(seat);
+                            btn.setStyle(estiloBase + "-fx-background-color: #FFC107; -fx-text-fill: black;");
+                        }
+                        updateLabels();
+                    });
+                }
 
                 seatsGrid.add(btn, col, row);
             }
         }
+    }
+
+    // NUEVO: Método para actualizar asientos y puntos al mismo tiempo
+    private void updateLabels() {
+        selectedSeatsLabel.setText("Asientos seleccionados: " + selectedSeats.size());
+
+        // Regla: 10 puntos por cada $10,000
+        int pointsPerTicket = (int) (screening.getBasePrice() / 10000) * 10;
+        int totalPoints = pointsPerTicket * selectedSeats.size();
+
+        totalPointsLabel.setText("Puntos a ganar: ⭐ " + totalPoints + " pts");
     }
 
     @FXML
@@ -72,14 +98,15 @@ public class SeatsController {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectofinalprogramacion2/View/concession-view.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 550);
+            StylesManager.applyStyles(scene); // AQUI
+
             Stage stage = new Stage();
-            stage.setTitle("Confitería");
-            stage.setScene(new Scene(loader.load(), 600, 500));
+            stage.setTitle("Confitería - " + screening.getMovie().getTitle());
+            stage.setScene(scene);
 
             ConcessionController controller = loader.getController();
-
             controller.initData(screening, selectedSeats);
-
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

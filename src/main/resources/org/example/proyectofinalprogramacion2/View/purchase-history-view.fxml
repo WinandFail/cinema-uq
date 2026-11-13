@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.proyectofinalprogramacion2.View.PurchaseHistoryController"
+      spacing="15" style="-fx-padding: 20;" alignment="CENTER">
+
+    <Label text="MI HISTORIAL DE COMPRAS" styleClass="title-text"/>
+
+    <TableView fx:id="purchaseTable" prefHeight="250" prefWidth="550">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="80"/>
+            <TableColumn fx:id="colDate" text="Fecha" prefWidth="130"/>
+            <TableColumn fx:id="colTotal" text="Total" prefWidth="90"/>
+            <TableColumn fx:id="colPoints" text="Puntos" prefWidth="80"/>
+            <TableColumn fx:id="colStatus" text="Estado" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <Button text="CERRAR" onAction="#onClose" prefWidth="150"/>
+</VBox>

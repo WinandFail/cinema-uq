@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.example.proyectofinalprogramacion2.View.ReportController"
-      spacing="10" style="-fx-padding: 20;">
+      spacing="20" style="-fx-padding: 30;" alignment="CENTER">
 
-    <Label text="Reports" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    <Label text="DASHBOARD DE REPORTES" styleClass="title-text"/>
 
-    <HBox spacing="10">
-        <ComboBox fx:id="formatCombo"/>
-        <Button text="Generate" onAction="#onGenerate"/>
+    <HBox spacing="30" alignment="CENTER" VBox.vgrow="ALWAYS">
+        <VBox spacing="15" alignment="CENTER" prefWidth="350">
+            <Label text="Reporte Exportable" style="-fx-font-size: 18px;"/>
+            <HBox spacing="10" alignment="CENTER">
+                <ComboBox fx:id="formatCombo" prefWidth="100"/>
+                <Button text="GENERAR Y EXPORTAR" onAction="#onGenerate"/>
+            </HBox>
+            <TextArea fx:id="reportArea" prefHeight="300" prefWidth="350" editable="false" wrapText="true" promptText="El reporte aparecerá aquí..."/>
+        </VBox>
+
+        <VBox spacing="15" alignment="CENTER" prefWidth="350">
+            <Label text="Distribución de Ventas" style="-fx-font-size: 18px;"/>
+            <PieChart fx:id="salesChart" legendSide="BOTTOM" labelsVisible="true" prefHeight="300" prefWidth="350"/>
+        </VBox>
     </HBox>
-
-    <TextArea fx:id="reportArea" prefHeight="300" editable="false"/>
 </VBox>

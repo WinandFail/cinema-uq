@@ -1,0 +1,197 @@
+/* =======================================================
+   CINEMA UQ - ESTILO WEB / RETRO-FUTURISTA
+   ======================================================= */
+
+.root {
+    -fx-background-color: linear-gradient(to bottom right, #0098FF, #009933);
+    -fx-font-family: "Bauhaus 93", "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.vbox, .hbox, .anchor-pane, .border-pane, .grid-pane, .stack-pane {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+}
+
+/* Textos Generales */
+.label {
+    -fx-text-fill: #C1E0DF;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 2);
+    -fx-text-alignment: center;
+}
+
+.text-muted {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 12px;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* BOTONES */
+.button {
+    -fx-background-color: rgba(0, 0, 0, 0.5);
+    -fx-text-fill: #C1E0DF;
+    -fx-font-family: "Bauhaus 93", "Segoe UI";
+    -fx-font-size: 15px;
+    -fx-border-color: #C1E0DF;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-padding: 8px 12px;
+}
+.button:hover {
+    -fx-background-color: #C1E0DF;
+    -fx-text-fill: #000000;
+}
+.button:pressed {
+    -fx-background-color: #a0b5b4;
+}
+
+/* CAMPOS DE ENTRADA DE TEXTO */
+.text-field, .password-field {
+    -fx-background-color: rgba(0, 0, 0, 0.6);
+    -fx-text-fill: #ffffff;
+    -fx-prompt-text-fill: #C1E0DF;
+    -fx-border-color: #0098FF;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-padding: 8px;
+}
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #C1E0DF;
+}
+
+/* =======================================================
+   CAJAS DE TEXTO (REPORTES, ACTIVIDAD, CARRITO)
+   ======================================================= */
+.text-area {
+    -fx-background-color: #C1E0DF;
+    -fx-border-color: #0098FF;
+    -fx-border-width: 2px;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-text-fill: #000000;
+    -fx-prompt-text-fill: #000000;
+}
+.text-area .content {
+    -fx-background-color: #C1E0DF;
+}
+.text-area .text {
+    -fx-fill: #000000;
+}
+
+/* =======================================================
+   TABLAS Y LISTAS
+   ======================================================= */
+.list-view, .table-view {
+    -fx-background-color: #C1E0DF;
+    -fx-border-color: #0098FF;
+    -fx-border-width: 2px;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+.list-view .list-cell {
+    -fx-text-fill: #000000;
+    -fx-background-color: transparent;
+}
+.list-view .list-cell:selected {
+    -fx-background-color: #0098FF;
+    -fx-text-fill: #FFFFFF;
+}
+.table-view .column-header {
+    -fx-background-color: #a0b5b4;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #000000;
+    -fx-font-size: 14px;
+}
+.table-row-cell {
+    -fx-background-color: transparent;
+}
+.table-view .table-cell {
+    -fx-text-fill: #000000;
+}
+.table-row-cell:selected .table-cell {
+    -fx-text-fill: #FFFFFF;
+}
+
+/* =======================================================
+   GRÁFICO DE PASTEL (PieChart)
+   ======================================================= */
+.chart-pie-label {
+    -fx-fill: #000000;
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-weight: bold;
+}
+.chart-legend-item {
+    -fx-text-fill: #000000;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+.chart-legend {
+    -fx-background-color: #C1E0DF;
+    -fx-border-color: #0098FF;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* =======================================================
+   PESTAÑAS DEL ADMINISTRADOR (TabPane)
+   ======================================================= */
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: #C1E0DF;
+    -fx-border-color: #0098FF;
+    -fx-border-width: 0 0 2px 0;
+}
+
+/* Centrar las pestañas en la parte superior */
+.tab-pane > .tab-header-area > .headers-region {
+    -fx-alignment: center;
+}
+
+/* El espacio interno de cada pestaña */
+.tab-pane .tab {
+    -fx-background-color: transparent;
+    -fx-padding: 10px 25px;
+}
+
+/* Texto de las pestañas */
+.tab-pane .tab .tab-label {
+    -fx-text-fill: #000000;
+    -fx-font-family: "Bauhaus 93", "Segoe UI";
+    -fx-font-size: 15px;
+}
+
+/* Pestaña activa */
+.tab-pane .tab:selected {
+    -fx-background-color: #0098FF;
+}
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: #FFFFFF;
+}
+
+/* =======================================================
+   COMBOBOX
+   ======================================================= */
+.combo-box {
+    -fx-background-color: rgba(0, 0, 0, 0.6);
+    -fx-border-color: #0098FF;
+}
+.combo-box .list-cell {
+    -fx-text-fill: #C1E0DF;
+    -fx-background-color: transparent;
+}
+.combo-box-popup .list-view {
+    -fx-background-color: #C1E0DF;
+}
+.combo-box-popup .list-cell {
+    -fx-text-fill: #000000;
+}
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #0098FF;
+    -fx-text-fill: #FFFFFF;
+}
+
+/* TÍTULOS GRANDES */
+.title-text {
+    -fx-font-size: 32px;
+    -fx-padding: 15px;
+    -fx-text-fill: #C1E0DF;
+}

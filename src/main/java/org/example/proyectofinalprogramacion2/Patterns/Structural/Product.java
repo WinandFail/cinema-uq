@@ -12,12 +12,13 @@ public class Product implements ProductComponent {
     }
 
     @Override
-    public double getFinalPrice() {
-        return this.price;
-    }
+    public double getFinalPrice() { return this.price; }
 
     @Override
-    public String getDescription() {
-        return this.name;
+    public String getDescription() { return this.name; }
+
+    @Override
+    public String toString() {
+        return this.name + " - $" + this.price;
     }
 }

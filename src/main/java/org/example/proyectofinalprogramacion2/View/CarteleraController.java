@@ -1,5 +1,6 @@
 package org.example.proyectofinalprogramacion2.View;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,61 +9,75 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import org.example.proyectofinalprogramacion2.Model.Movie;
-import org.example.proyectofinalprogramacion2.Model.Room;
+import org.example.proyectofinalprogramacion2.Model.Customer;
 import org.example.proyectofinalprogramacion2.Model.Screening;
-import org.example.proyectofinalprogramacion2.Model.Seat;
+import org.example.proyectofinalprogramacion2.Services.DataStore;
+import org.example.proyectofinalprogramacion2.Services.SessionManager;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CarteleraController {
     @FXML private TableView<Screening> movieTable;
     @FXML private TableColumn<Screening, String> colTitle;
     @FXML private TableColumn<Screening, String> colRoom;
-    @FXML private TableColumn<Screening, LocalDateTime> colTime;
-    @FXML private TableColumn<Screening, Double> colPrice;
+    @FXML private TableColumn<Screening, String> colTime;
+    @FXML private TableColumn<Screening, String> colPrice;
+    @FXML private TableColumn<Screening, String> colPoints;
 
     @FXML
     public void initialize() {
-        colTitle.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getMovie().getTitle()));
-        colRoom.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getRoom().getName()));
-        colTime.setCellValueFactory(new PropertyValueFactory<>("datetime")); // Asumiendo que tienes getDatetime()
-        colPrice.setCellValueFactory(new PropertyValueFactory<>("basePrice"));
+        colTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMovie().getTitle()));
+        colRoom.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRoom().getName()));
 
-        Movie movie1 = new Movie("Interestelar", "Ciencia Ficción", 120, "PG-13");
-        Room room1 = new Room("Sala 1", 50);
-        Screening s1 = new Screening(movie1, room1, LocalDateTime.now().plusDays(1), 16000);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        colTime.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDateTime().format(formatter)));
 
-        Movie movie2 = new Movie("El Padrino", "Drama", 175, "R");
-        Room room2 = new Room("Sala 2", 50);
-        Screening s2 = new Screening(movie2, room2, LocalDateTime.now().plusDays(1), 15000);
+        colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("$%,.0f", cellData.getValue().getBasePrice())));
 
-        ObservableList<Screening> screenings = FXCollections.observableArrayList(s1, s2);
+        // REGLA: 10 puntos por cada 10000
+        colPoints.setCellValueFactory(cellData -> {
+            double price = cellData.getValue().getBasePrice();
+            int points = (int) (price / 10000) * 10;
+            return new SimpleStringProperty("⭐ " + points + " pts");
+        });
+
+        ObservableList<Screening> screenings = FXCollections.observableArrayList(DataStore.screenings);
         movieTable.setItems(screenings);
+    }
+
+    @FXML
+    private void onCheckPoints() {
+        Customer customer = (Customer) SessionManager.getInstance().getCurrentUser();
+        if (customer == null) return;
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Puntos CinemaUQ");
+        alert.setHeaderText("Hola, " + customer.getName());
+        alert.setContentText("Actualmente tienes ⭐ " + customer.totalPoints() + " puntos disponibles.");
+        alert.showAndWait();
     }
 
     @FXML
     private void onSelectScreening() {
         Screening selected = movieTable.getSelectionModel().getSelectedItem();
         if (selected == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Por favor selecciona una función.");
-            alert.show();
+            new Alert(Alert.AlertType.WARNING, "Por favor selecciona una función.").show();
             return;
         }
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectofinalprogramacion2/View/seats-view.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 550);
+            StylesManager.applyStyles(scene); // AQUI
+
             Stage stage = new Stage();
             stage.setTitle("Selección de Asientos - " + selected.getMovie().getTitle());
-            stage.setScene(new Scene(loader.load(), 600, 500));
-
+            stage.setScene(scene);
 
             SeatsController controller = loader.getController();
             controller.initData(selected);
-
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
