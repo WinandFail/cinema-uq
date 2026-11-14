@@ -19,7 +19,6 @@ public class Points {
 
     public int getAmount() { return amount; }
 
-    // NUEVO: Para poder restar puntos al redimir
     public void setAmount(int amount) { this.amount = amount; }
 
     public LocalDate getExpirationDate() { return expirationDate; }

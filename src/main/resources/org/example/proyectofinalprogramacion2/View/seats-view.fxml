@@ -8,7 +8,6 @@
 
     <Label text="Selecciona tus Asientos" styleClass="title-text"/>
 
-    <!-- PANTALLA EN NEGRO -->
     <Label text="PANTALLA" style="-fx-background-color: black; -fx-text-fill: #C1E0DF; -fx-font-family: 'Segoe UI'; -fx-font-weight: bold; -fx-padding: 10px 150px; -fx-border-radius: 20px; -fx-background-radius: 20px;"/>
 
     <GridPane fx:id="seatsGrid" alignment="CENTER" hgap="8" vgap="8" style="-fx-padding: 15px;"/>

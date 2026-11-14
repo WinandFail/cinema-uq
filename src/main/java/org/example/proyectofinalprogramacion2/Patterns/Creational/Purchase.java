@@ -15,15 +15,13 @@ public class Purchase {
     private List<Promotion> promotions = new ArrayList<>();
 
     private double total;
-    private double subTotal; // Guarda el valor antes del IVA
+    private double subTotal;
     private LocalDateTime screeningDate;
     private int earnedPoints;
 
-    // Relaciones para el Administrador
     private Customer customer;
     private Screening screening;
 
-    // Patrón State
     private PurchaseState currentState;
 
     public Purchase() {
@@ -31,7 +29,6 @@ public class Purchase {
         this.currentState = new PendingState();
     }
 
-    // --- MÉTODOS DEL PATRÓN STATE ---
     public void setState(PurchaseState state) { this.currentState = state; }
     public PurchaseState getCurrentState() { return currentState; }
 
@@ -39,33 +36,30 @@ public class Purchase {
     public void cancel() { currentState.cancel(this); }
     public void refund() { currentState.refund(this); }
 
-    // --- LÓGICA DE NEGOCIO ---
+
     public double calculateTotal() {
         double sub = 0;
 
-        // Sumamos boletos
+
         for (Ticket t : tickets) {
             sub += t.getPrice();
         }
 
-        // Sumamos productos y combos
         for (ProductComponent c : items) {
             sub += c.getFinalPrice();
         }
 
-        // Restamos descuentos/promociones (ej. Canje de puntos)
         for (Promotion p : promotions) {
             sub -= p.getDiscount();
         }
 
-        // Validación: Evitar que el subtotal quede negativo
         if (sub < 0) {
             sub = 0;
         }
 
-        this.subTotal = sub; // Guardamos el subtotal real
+        this.subTotal = sub;
 
-        // Aplicamos el IVA (19%)
+
         double vat = CinemaConfig.getInstance().getVat();
         this.total = sub + (sub * vat);
 
@@ -76,7 +70,7 @@ public class Purchase {
         this.items.add(item);
     }
 
-    // --- GETTERS Y SETTERS ---
+
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 

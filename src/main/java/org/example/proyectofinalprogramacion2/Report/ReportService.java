@@ -14,7 +14,7 @@ public class ReportService {
         int totalCompras = 0;
         int ticketsVendidos = 0;
 
-        // Calcular datos reales
+
         for (Purchase p : DataStore.allPurchases) {
             if (p.getStatus() == PurchaseStatus.PAID) {
                 totalVentas += p.getTotal();
@@ -30,7 +30,6 @@ public class ReportService {
             }
         }
 
-        // Formatear el reporte
         String content = String.format(
                 "=== CinemaUQ - REPORTE DE VENTAS (%s) ===\n\n" +
                         "Total de Compras Exitosas: %d\n" +
@@ -45,7 +44,6 @@ public class ReportService {
                 java.time.LocalDateTime.now()
         );
 
-        // Exportar (Lógica de los patrones que ya tienes)
         if (type.equalsIgnoreCase("TXT")) {
             System.out.println("Exportando TXT a: " + path);
         } else {

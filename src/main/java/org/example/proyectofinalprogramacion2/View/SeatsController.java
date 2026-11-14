@@ -19,7 +19,7 @@ import java.util.List;
 public class SeatsController {
     @FXML private GridPane seatsGrid;
     @FXML private Label selectedSeatsLabel;
-    @FXML private Label totalPointsLabel; // NUEVO
+    @FXML private Label totalPointsLabel;
 
     private Screening screening;
     private List<Seat> selectedSeats = new ArrayList<>();
@@ -43,22 +43,22 @@ public class SeatsController {
                 room.getSeats().add(seat);
 
                 Button btn = new Button(seatRow + seatNum);
-                // Botones un poco más cuadrados y con buen espacio
+
                 btn.setPrefSize(45, 45);
 
-                // --- SOLUCIÓN: Fuente estándar, tamaño ajustado y sin padding interno ---
+
                 String estiloBase = "-fx-font-family: 'Segoe UI', Arial, sans-serif; " +
                         "-fx-font-size: 13px; " +
                         "-fx-font-weight: bold; " +
                         "-fx-padding: 0; ";
 
                 if ((row == 1 && col == 1) || (row == 2 && col == 4) || (row == 3 && col == 6)) {
-                    // Asiento Ocupado
+
                     seat.occupy();
                     btn.setStyle(estiloBase + "-fx-background-color: #9E9E9E; -fx-text-fill: white;");
                     btn.setDisable(true);
                 } else {
-                    // Asiento Disponible
+
                     btn.setStyle(estiloBase + "-fx-background-color: #4CAF50; -fx-text-fill: white;");
 
                     btn.setOnAction(e -> {
@@ -78,11 +78,10 @@ public class SeatsController {
         }
     }
 
-    // NUEVO: Método para actualizar asientos y puntos al mismo tiempo
     private void updateLabels() {
         selectedSeatsLabel.setText("Asientos seleccionados: " + selectedSeats.size());
 
-        // Regla: 10 puntos por cada $10,000
+
         int pointsPerTicket = (int) (screening.getBasePrice() / 10000) * 10;
         int totalPoints = pointsPerTicket * selectedSeats.size();
 
@@ -99,7 +98,7 @@ public class SeatsController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectofinalprogramacion2/View/concession-view.fxml"));
             Scene scene = new Scene(loader.load(), 600, 550);
-            StylesManager.applyStyles(scene); // AQUI
+            StylesManager.applyStyles(scene);
 
             Stage stage = new Stage();
             stage.setTitle("Confitería - " + screening.getMovie().getTitle());

@@ -25,7 +25,7 @@ public class PurchaseService {
         customer.getCard().debit(purchase.getTotal(), "Compra " + purchase.getId());
         purchase.pay();
 
-        // --- REGLA DE NEGOCIO: 10 puntos por cada $10,000 ---
+
         int earnedPoints = (int) (purchase.getSubTotal() / 10000) * 10;
 
         customer.addPoints(new Points(earnedPoints));

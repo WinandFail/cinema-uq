@@ -19,7 +19,7 @@ public class ConcessionController {
     @FXML private ListView<ProductComponent> productsList;
     @FXML private TextArea cartArea;
     @FXML private Label totalPointsLabel;
-    @FXML private CheckBox usePointsCheckBox; // NUEVO
+    @FXML private CheckBox usePointsCheckBox;
 
     private Screening screening;
     private List<Seat> selectedSeats;
@@ -93,22 +93,22 @@ public class ConcessionController {
 
         PointsService pointsService = new PointsService();
 
-        // --- LÓGICA DE REDENCIÓN DE PUNTOS ---
+
         if (usePointsCheckBox.isSelected()) {
             if (pointsService.canRedeem(currentCustomer, 100)) {
-                // Aplicamos el descuento de $5,000 a la compra
+
                 builder.applyPromotion(new Promotion("Descuento por Puntos", 5000));
             } else {
                 new Alert(Alert.AlertType.WARNING, "No tienes suficientes puntos (necesitas 100).").show();
-                return; // Detenemos el pago
+                return;
             }
         }
 
         try {
-            // Procesamos el pago (el total ya incluye el descuento si se aplicó)
+
             Purchase purchase = new PurchaseService().processPurchase(currentCustomer, builder);
 
-            // Si el pago fue exitoso y usó puntos, se los descontamos
+
             if (usePointsCheckBox.isSelected()) {
                 pointsService.deductPoints(currentCustomer, 100);
             }

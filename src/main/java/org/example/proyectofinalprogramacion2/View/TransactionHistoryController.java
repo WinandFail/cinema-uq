@@ -16,7 +16,7 @@ public class TransactionHistoryController {
         Customer customer = (Customer) SessionManager.getInstance().getCurrentUser();
 
         if (customer != null && customer.getCard() != null) {
-            // Recorremos las transacciones y las agregamos a la lista
+
             for (Transaction t : customer.getCard().getTransactions()) {
                 transactionList.getItems().add(t.toString());
             }

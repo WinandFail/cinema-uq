@@ -44,7 +44,7 @@ public class LoginController {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Scene scene = new Scene(loader.load(), 900, 650);
-            StylesManager.applyStyles(scene); // AQUI APLICAMOS EL CSS
+            StylesManager.applyStyles(scene);
 
             stage.setTitle("CinemaUQ - " + (user instanceof Admin ? "Administrador" : "Cliente"));
             stage.setScene(scene);

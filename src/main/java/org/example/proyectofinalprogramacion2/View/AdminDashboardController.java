@@ -61,7 +61,6 @@ public class AdminDashboardController {
         screeningCombo.setButtonCell(screeningCombo.getCellFactory().call(null));
     }
 
-    // --- VALIDACIÓN 1: RECARGAS ---
     @FXML
     private void onRechargeCard() {
         Customer selected = customerCombo.getValue();
@@ -92,7 +91,7 @@ public class AdminDashboardController {
         }
     }
 
-    // --- VALIDACIÓN 2: CANCELAR FUNCIÓN ---
+
     @FXML
     private void onCancelScreening() {
         Screening selected = screeningCombo.getValue();
@@ -115,7 +114,7 @@ public class AdminDashboardController {
         cancelLogArea.appendText("Función cancelada. Se reembolsó a " + reembolsos + " clientes.\n");
     }
 
-    // --- VALIDACIÓN 3: AGREGAR PELÍCULA ---
+
     @FXML
     private void onAddMovie() {
         String title = movieTitleField.getText().trim();
@@ -148,7 +147,7 @@ public class AdminDashboardController {
         }
     }
 
-    // --- VALIDACIÓN 4: AGREGAR PRODUCTO ---
+
     @FXML
     private void onAddProduct() {
         String name = prodNameField.getText().trim();
@@ -176,7 +175,7 @@ public class AdminDashboardController {
         }
     }
 
-    // --- VALIDACIÓN 5: AGREGAR COMBO ---
+
     @FXML
     private void onAddCombo() {
         String name = comboNameField.getText().trim();

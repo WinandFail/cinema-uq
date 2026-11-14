@@ -16,7 +16,7 @@ public class ProxyController {
         try {
             double amount = Double.parseDouble(amountField.getText());
             Customer customer = new Customer("C-002", "Test", "test@test.com", "123", "300");
-            customer.setCard(new VirtualCard("1234-5678", 100000)); // Saldo de 100.000
+            customer.setCard(new VirtualCard("1234-5678", 100000));
 
             PaymentProxy proxy = new PaymentProxy(customer);
             boolean success = proxy.processPayment(amount);

@@ -1,7 +1,7 @@
 package org.example.proyectofinalprogramacion2.Patterns.Structural;
 
 import org.example.proyectofinalprogramacion2.Model.Customer;
-import org.example.proyectofinalprogramacion2.Model.CardStatus; // <-- Importante importar esto
+import org.example.proyectofinalprogramacion2.Model.CardStatus;
 import org.example.proyectofinalprogramacion2.Services.PaymentService;
 
 public class PaymentProxy implements PaymentService {

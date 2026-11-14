@@ -82,14 +82,14 @@ public class CustomerDashboardController implements PurchaseObserver {
             customer.getCard().recharge(refundAmount);
             try {
                 lastPurchase.cancel();
-                outputArea.appendText("✅ Cancelación exitosa de la compra " + lastPurchase.getId() + ".\n");
-                outputArea.appendText(String.format("💰 Reembolso abonado a tu tarjeta: $%,.0f\n", refundAmount));
+                outputArea.appendText(" Cancelación exitosa de la compra " + lastPurchase.getId() + ".\n");
+                outputArea.appendText(String.format(" Reembolso abonado a tu tarjeta: $%,.0f\n", refundAmount));
                 updateBalanceLabel();
             } catch (IllegalStateException e) {
                 outputArea.appendText("Error: " + e.getMessage() + "\n");
             }
         } else {
-            outputArea.appendText("❌ No se puede cancelar la compra " + lastPurchase.getId() + ".\n");
+            outputArea.appendText(" No se puede cancelar la compra " + lastPurchase.getId() + ".\n");
             outputArea.appendText("Motivo: Faltan menos de 2 horas para la función.\n");
         }
     }

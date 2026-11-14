@@ -36,7 +36,7 @@ public class CarteleraController {
 
         colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("$%,.0f", cellData.getValue().getBasePrice())));
 
-        // REGLA: 10 puntos por cada 10000
+
         colPoints.setCellValueFactory(cellData -> {
             double price = cellData.getValue().getBasePrice();
             int points = (int) (price / 10000) * 10;
@@ -70,7 +70,7 @@ public class CarteleraController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/proyectofinalprogramacion2/View/seats-view.fxml"));
             Scene scene = new Scene(loader.load(), 600, 550);
-            StylesManager.applyStyles(scene); // AQUI
+            StylesManager.applyStyles(scene);
 
             Stage stage = new Stage();
             stage.setTitle("Selección de Asientos - " + selected.getMovie().getTitle());

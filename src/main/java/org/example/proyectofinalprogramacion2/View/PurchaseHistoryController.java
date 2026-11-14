@@ -40,7 +40,6 @@ public class PurchaseHistoryController {
         colPoints.setCellValueFactory(data -> new SimpleStringProperty("⭐ " + data.getValue().getEarnedPoints()));
         colStatus.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStatus().toString()));
 
-        // Cargar los datos del cliente
         purchaseTable.setItems(FXCollections.observableArrayList(DataStore.getPurchasesByCustomer(customer)));
     }
 

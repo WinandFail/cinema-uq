@@ -8,7 +8,7 @@
 
     <Label text="PANEL DE ADMINISTRACIÓN" styleClass="title-text"/>
 
-    <!-- Hacemos que el TabPane crezca dinámicamente y ocupe todo el espacio -->
+
     <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS" maxWidth="Infinity" maxHeight="Infinity">
 
         <Tab text="Recargas">

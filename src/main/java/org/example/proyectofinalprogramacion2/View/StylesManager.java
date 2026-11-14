@@ -9,7 +9,7 @@ public class StylesManager {
         if (cssUrl != null) {
             scene.getStylesheets().add(cssUrl.toExternalForm());
         } else {
-            System.err.println("⚠️ ADVERTENCIA: No se encontró styles.css");
+            System.err.println(" ADVERTENCIA: No se encontró styles.css");
         }
     }
 }

@@ -17,7 +17,6 @@ public class DataStore {
     public static final List<Purchase> allPurchases = new ArrayList<>();
 
     static {
-        // --- 1. USUARIOS BASE ---
         Customer ana = new Customer("C-001", "Ana", "ana@uq.edu.co", "1234", "3001234567");
         ana.getCard().recharge(200_000);
 
@@ -30,7 +29,7 @@ public class DataStore {
         users.add(carlos);
         users.add(admin);
 
-        // --- 2. CARTELERA ---
+
         Movie movie1 = new Movie("Interestelar", "Ciencia Ficción", 120, "PG-13");
         Movie movie2 = new Movie("El Padrino", "Drama", 175, "R");
         movies.add(movie1);
@@ -44,7 +43,7 @@ public class DataStore {
         screenings.add(screening1);
         screenings.add(screening2);
 
-        // --- 3. CONFETERÍA ---
+
         Combo comboPareja = new Combo("Combo Pareja", 25000, 3000);
         comboPareja.addItem(new Product("Palomitas", 15000));
         comboPareja.addItem(new Product("Soda", 10000));
@@ -56,9 +55,6 @@ public class DataStore {
         products.add(soda);
         products.add(comboPareja);
 
-        // --- 4. SIMULACIÓN DE VENTAS HISTÓRICAS (Para Reportes) ---
-
-        // Venta 1: Ana compra 2 boletos para Interestelar
         PurchaseBuilder builder1 = new PurchaseBuilder()
                 .withId("V-001")
                 .withCustomer(ana)
@@ -70,7 +66,6 @@ public class DataStore {
         purchase1.setStatus(PurchaseStatus.PAID);
         allPurchases.add(purchase1);
 
-        // Venta 2: Carlos compra 1 boleto para El Padrino + Combo Pareja
         PurchaseBuilder builder2 = new PurchaseBuilder()
                 .withId("V-002")
                 .withCustomer(carlos)
@@ -82,11 +77,11 @@ public class DataStore {
         purchase2.setStatus(PurchaseStatus.PAID);
         allPurchases.add(purchase2);
 
-        // Venta 3: Ana compra solo confitería (Palomitas y Soda)
+
         PurchaseBuilder builder3 = new PurchaseBuilder()
                 .withId("V-003")
                 .withCustomer(ana)
-                .withScreening(screening1) // Le asociamos una función ficticia para que no falle
+                .withScreening(screening1)
                 .withScreeningDate(screening1.getDateTime())
                 .addProduct(palomitas)
                 .addProduct(soda);
@@ -94,7 +89,7 @@ public class DataStore {
         purchase3.setStatus(PurchaseStatus.PAID);
         allPurchases.add(purchase3);
 
-        // Venta 4: Carlos compra 3 boletos para Interestelar
+
         PurchaseBuilder builder4 = new PurchaseBuilder()
                 .withId("V-004")
                 .withCustomer(carlos)

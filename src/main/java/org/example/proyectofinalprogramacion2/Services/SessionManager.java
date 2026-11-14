@@ -4,7 +4,7 @@ import org.example.proyectofinalprogramacion2.Model.User;
 
 public class SessionManager {
     private static SessionManager instance;
-    private User currentUser; // Ahora es User, puede ser Admin o Customer
+    private User currentUser;
 
     private SessionManager() {}
 

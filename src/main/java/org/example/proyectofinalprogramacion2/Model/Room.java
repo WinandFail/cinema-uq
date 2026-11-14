@@ -11,7 +11,6 @@ public class Room {
         this.name = name;
         this.capacity = capacity;
     }
-    // En Room.java
     private List<Seat> seats = new ArrayList<>();
 
     public List<Seat> getSeats() {
