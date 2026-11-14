@@ -1,23 +1,25 @@
 package org.example.proyectofinalprogramacion2.View;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-import org.example.proyectofinalprogramacion2.Model.PurchaseStatus;
-import org.example.proyectofinalprogramacion2.Model.Ticket;
-import org.example.proyectofinalprogramacion2.Model.ProductComponent;
+import org.example.proyectofinalprogramacion2.Model.*;
 import org.example.proyectofinalprogramacion2.Patterns.Creational.Purchase;
 import org.example.proyectofinalprogramacion2.Report.ReportService;
 import org.example.proyectofinalprogramacion2.Services.DataStore;
 
-public class ReportController {
+import java.util.HashMap;
+import java.util.Map;
 
+public class ReportController {
     @FXML private ComboBox<String> formatCombo;
     @FXML private TextArea reportArea;
     @FXML private PieChart salesChart;
+    @FXML private BarChart<String, Number> movieBarChart;
+    @FXML private LineChart<String, Number> trendLineChart;
 
     private final ReportService reportService = new ReportService();
 
@@ -25,48 +27,56 @@ public class ReportController {
     public void initialize() {
         formatCombo.getItems().addAll("TXT", "PDF");
         formatCombo.getSelectionModel().selectFirst();
-
-
-        updateVisualChart();
+        updateAllCharts();
     }
 
     @FXML
     private void onGenerate() {
         String format = formatCombo.getValue();
-        String content = reportService.generateAndExport(format, "Reportes/reporte." + format.toLowerCase());
+        String filePath = "Reportes/reporte_cinemauq." + format.toLowerCase();
+        String content = reportService.generateAndExport(format, filePath);
         reportArea.setText(content);
-
-
-        updateVisualChart();
+        updateAllCharts();
+        new Alert(Alert.AlertType.INFORMATION, "Reporte exportado exitosamente en: " + filePath).show();
     }
 
+    private void updateAllCharts() {
+        double ticketRev = 0, concessionRev = 0;
+        Map<String, Integer> ticketsByMovie = new HashMap<>();
+        XYChart.Series<String, Number> lineSeries = new XYChart.Series<>();
+        lineSeries.setName("Facturación por Compra ($)");
 
-    private void updateVisualChart() {
-        double ticketRevenue = 0.0;
-        double concessionRevenue = 0.0;
-
+        int idx = 1;
         for (Purchase p : DataStore.allPurchases) {
             if (p.getStatus() == PurchaseStatus.PAID) {
+                for (Ticket t : p.getTickets()) ticketRev += t.getPrice();
+                for (ProductComponent item : p.getItems()) concessionRev += item.getFinalPrice();
 
-                for (Ticket t : p.getTickets()) {
-                    ticketRevenue += t.getPrice();
+                if (p.getScreening() != null) {
+                    String title = p.getScreening().getMovie().getTitle();
+                    ticketsByMovie.put(title, ticketsByMovie.getOrDefault(title, 0) + p.getTickets().size());
                 }
-
-                for (ProductComponent item : p.getItems()) {
-                    concessionRevenue += item.getFinalPrice();
-                }
+                lineSeries.getData().add(new XYChart.Data<>("Compra #" + idx++, p.getTotal()));
             }
         }
 
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
-        if (ticketRevenue == 0 && concessionRevenue == 0) {
-            pieChartData.add(new PieChart.Data("Sin ventas aún", 1));
-        } else {
-            pieChartData.add(new PieChart.Data("Boletos ($" + String.format("%,.0f", ticketRevenue) + ")", ticketRevenue));
-            pieChartData.add(new PieChart.Data("Confitería ($" + String.format("%,.0f", concessionRevenue) + ")", concessionRevenue));
+        salesChart.setData(FXCollections.observableArrayList(
+                new PieChart.Data("Boletos", ticketRev),
+                new PieChart.Data("Confitería", concessionRev)
+        ));
+
+        if (movieBarChart != null) {
+            movieBarChart.getData().clear();
+            XYChart.Series<String, Number> barSeries = new XYChart.Series<>();
+            barSeries.setName("Boletos Vendidos");
+            ticketsByMovie.forEach((movie, count) -> barSeries.getData().add(new XYChart.Data<>(movie, count)));
+            movieBarChart.getData().add(barSeries);
         }
 
-        salesChart.setData(pieChartData);
+        if (trendLineChart != null) {
+            trendLineChart.getData().clear();
+            trendLineChart.getData().add(lineSeries);
+        }
     }
 }

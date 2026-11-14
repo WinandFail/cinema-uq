@@ -1,0 +1,9 @@
+=== CinemaUQ Reporte (TXT) ===
+Fecha de generacion: 14/11/2026 12:45:33
+Periodo consultado: Operacion Actual CinemaUQ
+--------------------------------------------------
+Compras Exitosas: 4 | Compras Canceladas: 0
+Boletos Vendidos: 6
+Ingresos Boletos: $95.000
+Ingresos Confiteria: $73.000
+TOTAL FACTURADO (con IVA 19%): $199.920
